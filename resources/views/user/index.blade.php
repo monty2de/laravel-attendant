@@ -18,7 +18,6 @@
 <table class="table">
     <thead class="thead-dark">
       <tr>
-        {{-- <th scope="col">#</th> --}}
         <th scope="col"> name  </th>
         <th scope="col"> email   </th>
         <th scope="col"> type </th>
@@ -30,7 +29,6 @@
     <tbody>
         @foreach ($users as $user )
       <tr>
-        {{-- <th scope="row">{{$user->id}}</th> --}}
         <td><a href="/users/{{$user->id}}"> {{ $user->name }}</a></td>
         <td>{{$user->email}}</td>
         <td>{{$user->type}}</td>

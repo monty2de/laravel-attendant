@@ -10,7 +10,7 @@
 
 <button type="button" class="btn btn-primary">
     
-    <a href="/students/add" style="color: black; font-size:20px">add student</a>
+    <a href="/subjects/add" style="color: black; font-size:20px">add subjects</a>
 </button>
 
 
@@ -18,7 +18,7 @@
     <thead class="thead-dark">
       <tr>
         <th scope="col"> name  </th>
-        <th scope="col"> email   </th>
+        <th scope="col"> total_hours   </th>
         <th scope="col"> year </th>
         <th scope="col"> edit </th>
         <th scope="col"> delet </th>
@@ -26,20 +26,20 @@
       </tr>
     </thead>
     <tbody>
-        @foreach ($students as $student )
+        @foreach ($subjects as $subject )
       <tr>
-        <td><a href=""> {{ $student->name }}</a></td>
-        <td>{{$student->email}}</td>
-        <td>{{$student->year}}</td>
+        <td><a href=""> {{ $subject->name }}</a></td>
+        <td>{{$subject->total_hours}}</td>
+        <td>{{$subject->year}}</td>
 
         <td>
           <div class="">
-              <a href="/students/{{$student->id}}/edit">edit</a>
-          
+              <a href="/subjects/{{$subject->id}}/edit">edit</a>
+              
           </div>
       </td>
       <td>
-          <form action="/students/{{$student->id}}" method="POST">
+          <form action="/subjects/{{$subject->id}}" method="POST">
               {{ csrf_field() }}
                  {{ method_field('DELETE') }}
       

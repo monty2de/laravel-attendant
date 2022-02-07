@@ -4,23 +4,39 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+
+    // public function __construct()
+    // {
+    //     // $this->middleware('auth')->only(['store']);
+    //     $this->middleware('auth');
+    // }
+
     public function index()
     {
+        if(auth()->user()->type != 'admin')
+        {
+            return redirect()->back();
+
+        }
         $users = User::all();
         return view('user.index' , compact('users'));
     }
 
-    public function show(User $user)
-    {
-        return view('user.show', compact('user'));
-    }
+    
 
     public function create()
     {
+
+        if(auth()->user()->type != 'admin')
+        {
+            return redirect()->back();
+
+        }
 
         return view('user.create');
 
@@ -28,6 +44,11 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+        if(auth()->user()->type != 'admin')
+        {
+            return redirect()->back();
+
+        }
 
         $request->validate([
             //'body'=>'required',
@@ -48,6 +69,11 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
+        if(auth()->user()->type != 'admin')
+        {
+            return redirect()->back();
+
+        }
         
         return view('user.edit', compact('user'));
     
@@ -55,6 +81,11 @@ class UserController extends Controller
 
     public function update(User $user)
     {
+        if(auth()->user()->type != 'admin')
+        {
+            return redirect()->back();
+
+        }
          
         $data = request()->validate([
             'name' => 'required',
@@ -67,7 +98,6 @@ class UserController extends Controller
             $data
         ));
 
-        // return redirect("/users/{$user->id}");
 
         $users = User::all();
         return view('user.index' , compact('users'));
@@ -76,10 +106,36 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
+        if(auth()->user()->type != 'admin')
+        {
+            return redirect()->back();
+
+        }
 
         $user->delete();
         $users = User::all();
         return view('user.index' , compact('users'));
+    }
+
+
+
+    public function login(Request $request)
+    {
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+        $credintial = $request->only('email', 'password');
+
+        
+
+        if(Auth::attempt($credintial)){
+            $user = User::where('email', $request->get('email'))->first();
+
+
+            return [ 'token' => $user->api_token , 'id' => $user->id ];
+        }
+        return 'not found';
     }
     
 }

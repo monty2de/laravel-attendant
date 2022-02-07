@@ -15,14 +15,15 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="/students/store">
+                    <form method="POST" action="/students/{{$st->id}}">
                         @csrf
+                        @method('PATCH')
 
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{$st->name    }}" required autocomplete="name" autofocus>
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -36,7 +37,7 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{$st->email}}" required autocomplete="email">
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -50,7 +51,7 @@
                             <label for="phone_number" class="col-md-4 col-form-label text-md-right">{{ __('phone_number') }}</label>
 
                             <div class="col-md-6">
-                                <input id="phone_number" type="text" class="form-control " name="phone_number" >
+                                <input id="phone_number" type="text" class="form-control " name="phone_number" value="{{$st->phone_number}}" >
 
                                 @error('phone_number')
                                     <span class="invalid-feedback" role="alert">
@@ -66,7 +67,7 @@
                             <label for="year" class="col-md-4 col-form-label text-md-right">{{ __('year') }}</label>
 
                             <div class="col-md-6">
-                                <input id="year" type="number" class="form-control" name="year" >
+                                <input id="year" type="number" class="form-control" name="year" value="{{$st->year}}" >
 
                                 @error('year')
                                     <span class="invalid-feedback" role="alert">
@@ -80,7 +81,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
+                                    UPDATE
                                 </button>
                             </div>
                         </div>

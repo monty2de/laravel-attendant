@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
+
+    // public function __construct()
+    // {
+    //     // $this->middleware('auth')->only(['store']);
+    //     $this->middleware('auth');
+    // }
     
 
     public function index()
@@ -35,10 +41,39 @@ class StudentController extends Controller
             'email' => $request->get('email'),
             'phone_number' => $request->get('phone_number'),
             'year' => $request->get('year'),
+            'warning_ratio' => $request->get('warning_ratio'),
         ]);
 
         $students = Student::all();
         return view('student.index' , compact('students'));
+    }
+
+
+    public function edit(Student $st)
+    {
+        
+        return view('student.edit', compact('st'));
+    
+    }
+
+    public function update(Student $st)
+    {
+         
+        $data = request()->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'phone_number' => 'required',
+            'year' => 'required',
+        ]);        
+
+
+        $st->update(array_merge(
+            $data
+        ));
+
+
+        $students = Student::all();
+        return view('Student.index' , compact('students'));
     }
 
 
@@ -47,8 +82,21 @@ class StudentController extends Controller
 
         $st = Student::where('id', $id)->first();
         $st->delete();
-        // return back();
+        $students = Student::all();
+
+        return view('student.index' , compact('students'));
+
     }
 
 
+    public function get(Request $request)
+    {
+      
+
+        $students = Student::where('year', $request->get('year'))->get();
+
+
+        return [ 'students' => $students ];
+
+    }
 }

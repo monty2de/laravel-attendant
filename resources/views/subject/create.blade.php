@@ -15,7 +15,7 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="/students/store">
+                    <form method="POST" action="/subjects/store">
                         @csrf
 
                         <div class="form-group row">
@@ -33,26 +33,27 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                            <label for="teacher_id" class="col-md-4 col-form-label"> the teacher </label>
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                            <select name="teacher_id" id="teacher_id" class="form-control" >
+                                @foreach ($teachers as $teacher)
 
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                                    <option value="{{$teacher->id}}" >{{$teacher->name}}</option>
+
+                                @endforeach
+
+                            </select>
+
+                           
                         </div>
 
                         <div class="form-group row">
-                            <label for="phone_number" class="col-md-4 col-form-label text-md-right">{{ __('phone_number') }}</label>
+                            <label for="total_hours" class="col-md-4 col-form-label text-md-right">{{ __('total_hours') }}</label>
 
                             <div class="col-md-6">
-                                <input id="phone_number" type="text" class="form-control " name="phone_number" >
+                                <input id="total_hours" type="text" class="form-control " name="total_hours" >
 
-                                @error('phone_number')
+                                @error('total_hours')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -76,7 +77,6 @@
                             </div>
                         </div>
                        
-                        <input id="warning_ratio" type="hidden"  name="warning_ratio" value="10" >
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">

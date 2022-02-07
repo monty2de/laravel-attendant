@@ -34,4 +34,21 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+
+
+    protected static function boot()
+    {
+        parent::boot();
+
+
+
+        static::creating(function ($user) {
+            $user->api_token = bin2hex(openssl_random_pseudo_bytes(30));
+        });
+
+        
+
+    }
 }
