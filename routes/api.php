@@ -33,5 +33,8 @@ Route::middleware(['cors'])->group(function () {
     // student
     Route::post('/students/get', 'StudentController@get');
 
+    //attent
+    Route::post('/attendant/store', 'AttendanceController@store');
+
         
 });

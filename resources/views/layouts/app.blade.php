@@ -46,6 +46,12 @@
                             <li class="nav-item">
                                 <a  class="nav-link" href="{{ url('/subjects') }}"> subjects</a>
                             </li>
+                            <li class="nav-item">
+                                <a  class="nav-link" href="{{ url('/attendent') }}"> attendent</a>
+                            </li>
+                            <li class="nav-item">
+                                <a  class="nav-link" href="{{ url('/sick') }}"> sick leave</a>
+                            </li>
                             @endif
                         @endif
                     </ul>

@@ -15,6 +15,9 @@ class CreateSicksTable extends Migration
     {
         Schema::create('sicks', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('student_id');
+            $table->string('student_name');
+            $table->date('date');
             $table->timestamps();
         });
     }

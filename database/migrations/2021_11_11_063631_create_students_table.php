@@ -19,7 +19,6 @@ class CreateStudentsTable extends Migration
             $table->string('email');
             $table->text('phone_number');
             $table->integer('year');
-            $table->integer('warning_ratio')->nullable();
             $table->timestamps();
         });
     }

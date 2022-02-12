@@ -41,7 +41,7 @@ class StudentController extends Controller
             'email' => $request->get('email'),
             'phone_number' => $request->get('phone_number'),
             'year' => $request->get('year'),
-            'warning_ratio' => $request->get('warning_ratio'),
+    
         ]);
 
         $students = Student::all();
