@@ -7,8 +7,8 @@
 @section('content')
 
 
-<div class="text-center">
-  <h1>{{$message}}</h1>
+<div class="text-center" style="margin-bottom: 20px">
+  <h1>Status: {{$message}}</h1>
 </div>
 
 
@@ -16,6 +16,7 @@
     <thead class="thead-dark">
       <tr>
         <th scope="col"> date  </th>
+        <th scope="col"> hours  </th>
         <th scope="col"> delet </th>
 
       </tr>
@@ -23,16 +24,16 @@
     <tbody>
         @foreach ($attenents as $attended )
       <tr>
-        <td><a href=""> {{ $attended->date }}</a></td>
-       
+        <td>   {{ $attended->date }} </td>
+        <td>   {{ $attended->hours }} </td>
 
       <td>
-       // make the delet
-          <form action="/students/{{$attended->id}}" method="POST">
+     
+          <form action="/attendent/{{$attended->id}}" method="POST">
               {{ csrf_field() }}
                  {{ method_field('DELETE') }}
       
-                  <button type="submit" class="btn btn-primary">DELET</button>
+                  <button type="submit" class="btn " style="color: blue">DELET</button>
              </form>
       </td>
         

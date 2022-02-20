@@ -10,19 +10,10 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
 
-    // public function __construct()
-    // {
-    //     // $this->middleware('auth')->only(['store']);
-    //     $this->middleware('auth');
-    // }
 
     public function index()
     {
-        if(auth()->user()->type != 'admin')
-        {
-            return redirect()->back();
-
-        }
+       
         $users = User::all();
         return view('user.index' , compact('users'));
     }
@@ -37,6 +28,7 @@ class UserController extends Controller
             return redirect()->back();
 
         }
+       
 
         return view('user.create');
 
@@ -50,9 +42,7 @@ class UserController extends Controller
 
         }
 
-        $request->validate([
-            //'body'=>'required',
-        ]);
+     
 
 
         User::create([

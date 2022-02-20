@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Attendance;
+use App\Exports\AttendancesExport;
 use App\Sick;
 use App\Student;
 use App\Subject;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class AttendanceController extends Controller
 {
@@ -40,10 +43,12 @@ class AttendanceController extends Controller
     public function get(Request $request)
     {
 
+        $attenents = Attendance::all();
+
         $subjects = Subject::all();
 
 
-        return view('attendent.get' , compact('subjects') );
+        return view('attendent.get' , compact('subjects' , 'attenents') );
     }
 
 
@@ -52,7 +57,7 @@ class AttendanceController extends Controller
 
         $missingHours = 0;
         $raio = 10;
-        $message = ' no warn';
+        $message = ' لا تنبية';
         $student = Student::where('name' , 'LIKE' ,'%'. $request->get('name') . '%' )->first();
         
         // check if student have a sick leave
@@ -67,8 +72,9 @@ class AttendanceController extends Controller
 
 
         // get the attendent of the st and sum all atteb
+        //make it where(subject name)
 
-        $attenents = Attendance::where('student_id' ,$student->id )->get();
+        $attenents = Attendance::where('student_id' ,$student->id )->where('subject_name' ,$request->get('subject') )->get();
 
         // cal the hourse
 
@@ -87,22 +93,75 @@ class AttendanceController extends Controller
         $missRaio = 100 - $attendRaio;
         
             // create the message
+            
         if ($raio == 10) {
+
             if ($missRaio >= 10) {
                 $message = 'تجاوز';
-              }elseif($missRaio < 10 &&  $attendRaio >= 7) {
-                  $message = '7';
-              }
-        }else{
+            }
+            elseif($missRaio < 10 &&  $missRaio >= 9) {
+             $message = 'انذار نهائي';
+            }
+            elseif($missRaio < 9 &&  $missRaio >= 7) {
+             $message = 'انذار اولي';
+            }
+            elseif($missRaio < 7 &&  $missRaio >= 5) {
+             $message = 'تنبية';
+            }
+        }
+        else{
             if ($missRaio >= 15) {
                 $message = 'تجاوز';
-              }elseif($missRaio < 10 &&  $attendRaio >= 7) {
-                  $message = '7';
-              }
+            }
+            elseif($missRaio < 15 &&  $missRaio >= 9) {
+            $message = 'انذار نهائي';
+            }
+            elseif($missRaio < 9 &&  $missRaio >= 7) {
+            $message = 'انذار اولي';
+            }
+            elseif($missRaio < 7 &&  $missRaio >= 5) {
+            $message = 'تنبية';
+            }
         }
         
 
+        // dd($raio);
         // dd($missRaio);
         return view('attendent.index' , compact('attenents' , 'message') );
+    }
+
+
+
+    public function destroy(Attendance $attendent)
+    {
+        if(auth()->user()->type != 'admin')
+        {
+            return redirect()->back();
+
+        }
+
+        $attendent->delete();
+        
+        $attenents = Attendance::all();
+
+        $subjects = Subject::all();
+
+
+        return view('attendent.get' , compact('subjects' , 'attenents') );
+        
+    }
+
+
+    public function export( )
+    {
+        if(auth()->user()->type != 'admin')
+        {
+            return redirect()->back();
+
+        }
+
+        return Excel::download(new AttendancesExport, 'data.xlsx');
+        
+        
     }
 }

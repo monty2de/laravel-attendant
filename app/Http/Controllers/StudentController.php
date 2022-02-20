@@ -17,8 +17,11 @@ class StudentController extends Controller
 
     public function index()
     {
-        $students = Student::all();
-        return view('student.index' , compact('students'));
+        $year1 = Student::where('year' , 1)->get();
+        $year2 = Student::where('year' , 2)->get();
+        $year3 = Student::where('year' , 3)->get();
+        $year4 = Student::where('year' , 4)->get();
+        return view('student.index' , compact('year1' , 'year2' , 'year3' , 'year4'));
     }
 
     public function create()
@@ -44,8 +47,11 @@ class StudentController extends Controller
     
         ]);
 
-        $students = Student::all();
-        return view('student.index' , compact('students'));
+        $year1 = Student::where('year' , 1)->get();
+        $year2 = Student::where('year' , 2)->get();
+        $year3 = Student::where('year' , 3)->get();
+        $year4 = Student::where('year' , 4)->get();
+        return view('student.index' , compact('year1' , 'year2' , 'year3' , 'year4'));
     }
 
 
@@ -72,8 +78,13 @@ class StudentController extends Controller
         ));
 
 
-        $students = Student::all();
-        return view('Student.index' , compact('students'));
+      
+
+        $year1 = Student::where('year' , 1)->get();
+        $year2 = Student::where('year' , 2)->get();
+        $year3 = Student::where('year' , 3)->get();
+        $year4 = Student::where('year' , 4)->get();
+        return view('student.index' , compact('year1' , 'year2' , 'year3' , 'year4'));
     }
 
 
@@ -82,11 +93,37 @@ class StudentController extends Controller
 
         $st = Student::where('id', $id)->first();
         $st->delete();
-        $students = Student::all();
-
-        return view('student.index' , compact('students'));
+        $year1 = Student::where('year' , 1)->get();
+        $year2 = Student::where('year' , 2)->get();
+        $year3 = Student::where('year' , 3)->get();
+        $year4 = Student::where('year' , 4)->get();
+        return view('student.index' , compact('year1' , 'year2' , 'year3' , 'year4'));
 
     }
+
+    public function move($year)
+    {
+
+        $studebts = Student::where('year', $year-1)->get();
+
+        foreach ($studebts as $studebt) {
+
+            $studebt->update([
+                'year' => $year,
+            ]);
+           
+        }
+
+        $year1 = Student::where('year' , 1)->get();
+        $year2 = Student::where('year' , 2)->get();
+        $year3 = Student::where('year' , 3)->get();
+        $year4 = Student::where('year' , 4)->get();
+
+     
+        return view('student.index' , compact('year1' , 'year2' , 'year3' , 'year4'));
+
+    }
+
 
 
     public function get(Request $request)

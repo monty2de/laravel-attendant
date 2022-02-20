@@ -12,14 +12,14 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="card-header">create subject</div>
 
                 <div class="card-body">
                     <form method="POST" action="/subjects/store">
                         @csrf
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">subject name</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -33,22 +33,18 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="teacher_id" class="col-md-4 col-form-label"> the teacher </label>
-
+                            <label for="teacher_id" class="col-md-4 col-form-label text-md-right">  teacher name </label>
+                            <div class="col-md-6">
                             <select name="teacher_id" id="teacher_id" class="form-control" >
                                 @foreach ($teachers as $teacher)
-
                                     <option value="{{$teacher->id}}" >{{$teacher->name}}</option>
-
                                 @endforeach
-
-                            </select>
-
-                           
+                            </select>      
+                        </div>         
                         </div>
 
                         <div class="form-group row">
-                            <label for="total_hours" class="col-md-4 col-form-label text-md-right">{{ __('total_hours') }}</label>
+                            <label for="total_hours" class="col-md-4 col-form-label text-md-right">{{ __('total hours') }}</label>
 
                             <div class="col-md-6">
                                 <input id="total_hours" type="text" class="form-control " name="total_hours" >
@@ -81,7 +77,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
+                                    create
                                 </button>
                             </div>
                         </div>

@@ -38,6 +38,9 @@ Route::get('/students/{st}/edit', 'StudentController@edit');
 Route::patch('/students/{st}', 'StudentController@update');
 Route::delete('/students/{st}', 'StudentController@destroy');
 
+Route::get('/students/move/{year}', 'StudentController@move');
+
+
 //subjects
 Route::get('/subjects', 'SubjectController@index');
 Route::get('/subjects/add', 'SubjectController@create');
@@ -49,7 +52,13 @@ Route::delete('/subjects/{sub}', 'SubjectController@destroy');
 //attendent
 Route::get('/attendent', 'AttendanceController@get');
 Route::post('/attendent/index', 'AttendanceController@index');
+Route::delete('/attendent/{attendent}', 'AttendanceController@destroy');
+Route::get('/attendent/export', 'AttendanceController@export');
+
 
 //sick
 Route::get('/sick', 'SickController@create');
 Route::post('/sick/store', 'SickController@store');
+Route::delete('/sick/{sick}', 'SickController@destroy');
+
+

@@ -6,19 +6,27 @@
 
 @section('content')
 
+<div class="container">
 
 
-<button type="button" class="btn btn-primary">
+  
+<div class="d-flex justify-content-center " style="margin-bottom: 20px">
+
+  <a class="btn btn-primary" href="/subjects/add" style="  font-size:20px">add subjects</a>
+
     
-    <a href="/subjects/add" style="color: black; font-size:20px">add subjects</a>
-</button>
+
+</div>
+
+
+    
 
 
 <table class="table">
     <thead class="thead-dark">
       <tr>
         <th scope="col"> name  </th>
-        <th scope="col"> total_hours   </th>
+        <th scope="col"> total hours   </th>
         <th scope="col"> year </th>
         <th scope="col"> edit </th>
         <th scope="col"> delet </th>
@@ -43,7 +51,7 @@
               {{ csrf_field() }}
                  {{ method_field('DELETE') }}
       
-                  <button type="submit" class="btn btn-primary">DELET</button>
+                  <button type="submit" class="btn " style="color: blue">DELET</button>
              </form>
       </td>
         
@@ -56,6 +64,9 @@
 
 
 
+
+
+</div>
 
 
 

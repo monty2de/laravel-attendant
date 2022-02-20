@@ -35,8 +35,8 @@
                         
                         <div class="form-group row">
                             <label for="subject" class="col-md-4 col-form-label text-md-right">subject name</label>
-
-                            <select name="subject" id="subject">
+                            <div class="col-md-6">
+                            <select name="subject" class="form-control" id="subject">
                                
 
                                 @foreach ($subjects as $subject )
@@ -44,8 +44,10 @@
                                 @endforeach
                               
                               </select>
+                            </div>
                         </div>
 
+                       
               
 
                       
@@ -62,6 +64,39 @@
             </div>
         </div>
     </div>
+
+
+    <table class="table" style="margin-top: 40px">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col"> student name  </th>
+            <th scope="col"> subject name  </th>
+            <th scope="col"> date   </th>
+            <th scope="col"> delet </th>
+          </tr>
+        </thead>
+        <tbody>
+            @foreach ($attenents as $item )
+          <tr>
+            <td>{{$item->student_name}}</td>
+            <td>{{$item->subject_name}}</td>
+            <td>{{$item->date}}</td>
+            
+            <td>
+                <form action="/attendent/{{$item->id}}" method="POST">
+                    {{ csrf_field() }}
+                       {{ method_field('DELETE') }}
+            
+                        <button type="submit" class="btn " style="color: blue">DELET</button>
+                   </form>
+            </td>
+            
+            
+          </tr>
+          @endforeach
+          
+        </tbody>
+      </table>
 </div>
 
 

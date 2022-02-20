@@ -50,6 +50,36 @@
             </div>
         </div>
     </div>
+
+    <table class="table" style="margin-top: 40px">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col"> student name  </th>
+            <th scope="col"> date   </th>
+            <th scope="col"> delet </th>
+          </tr>
+        </thead>
+        <tbody>
+            @foreach ($sicks as $item )
+          <tr>
+            <td>{{$item->student_name}}</td>
+            <td>{{$item->date}}</td>
+            
+            <td>
+                <form action="/sick/{{$item->id}}" method="POST">
+                    {{ csrf_field() }}
+                       {{ method_field('DELETE') }}
+            
+                        <button type="submit" class="btn" style="color: blue">DELET</button>
+                   </form>
+            </td>
+            
+            
+          </tr>
+          @endforeach
+          
+        </tbody>
+      </table>
 </div>
 
 

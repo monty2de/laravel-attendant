@@ -13,7 +13,9 @@ class SickController extends Controller
     public function create()
     {
 
-        return view('sick.create');
+        $sicks = Sick::all();
+
+        return view('sick.create' , compact('sicks'));
 
     }
 
@@ -31,7 +33,25 @@ class SickController extends Controller
         
         ]);
 
-        $students = Student::all();
-        return view('student.index' , compact('students'));
+        $sicks = Sick::all();
+
+        return view('sick.create' , compact('sicks'));
+        
+    }
+
+
+    public function destroy(Sick $sick)
+    {
+        if(auth()->user()->type != 'admin')
+        {
+            return redirect()->back();
+
+        }
+
+        $sick->delete();
+        
+        $sicks = Sick::all();
+
+        return view('sick.create' , compact('sicks'));
     }
 }

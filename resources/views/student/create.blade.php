@@ -47,7 +47,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="phone_number" class="col-md-4 col-form-label text-md-right">{{ __('phone_number') }}</label>
+                            <label for="phone_number" class="col-md-4 col-form-label text-md-right">{{ __('phone number') }}</label>
 
                             <div class="col-md-6">
                                 <input id="phone_number" type="text" class="form-control " name="phone_number" >
@@ -76,12 +76,11 @@
                             </div>
                         </div>
                        
-                        <input id="warning_ratio" type="hidden"  name="warning_ratio" value="10" >
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
+                                    create
                                 </button>
                             </div>
                         </div>
