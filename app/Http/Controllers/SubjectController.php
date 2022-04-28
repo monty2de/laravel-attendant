@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Course;
+use App\Instructor;
+use App\Level;
+use App\Semester;
 use App\Subject;
 use App\User;
 use Illuminate\Http\Request;
@@ -12,13 +16,10 @@ class SubjectController extends Controller
 
     public function index()
     {
-        if(auth()->user()->type != 'admin')
-        {
-            return redirect()->back();
+       
 
-        }
-        $subjects = Subject::all();
-        return view('subject.index' , compact('subjects'));
+        $courses = Course::all();
+        return view('subject.index' , compact('courses'));
     }
 
     
@@ -26,15 +27,10 @@ class SubjectController extends Controller
     public function create()
     {
 
-        if(auth()->user()->type != 'admin')
-        {
-            return redirect()->back();
+        $levels = Level::all();
+        $semesters = Semester::all();
 
-        }
-
-        $teachers = User::where('type','!=','admin')->get() ;
-
-        return view('subject.create' ,compact('teachers') );
+        return view('subject.create' ,compact('levels' , 'semesters') );
 
     }
 
@@ -46,37 +42,31 @@ class SubjectController extends Controller
 
         }
 
-        $request->validate([
-            //'body'=>'required',
-        ]);
-
-
-        Subject::create([
-            'name' => $request->get('name'),
-            'teacher_id' => $request->get('teacher_id'),
-            'year' => $request->get('year'),
+        Course::create([
+            'name_ar' => $request->get('name_ar'),
+            'name_en' => $request->get('name_en'),
+            'level_id' => $request->get('level_id'),
+            'semester_id' => $request->get('semester_id'),
+            'code' => $request->get('code'),
+            'unit' => $request->get('unit'),
             'total_hours' => $request->get('total_hours'),
         ]);
 
-        $subjects = Subject::all();
-        return view('subject.index' , compact('subjects'));
+        $courses = Course::all();
+        return view('subject.index' , compact('courses'));
     }
 
 
-    public function edit(Subject $sub)
+    public function edit(Course $sub)
     {
-        if(auth()->user()->type != 'admin')
-        {
-            return redirect()->back();
-
-        }
-        $teachers = User::where('type','!=','admin')->get() ;
-
-        return view('subject.edit', compact('sub', 'teachers'));
+      
+        $levels = Level::all();
+        $semesters = Semester::all();
+        return view('subject.edit', compact('sub', 'levels' , 'semesters'));
     
     }
 
-    public function update(Subject $sub)
+    public function update(Course $sub)
     {
         if(auth()->user()->type != 'admin')
         {
@@ -85,10 +75,13 @@ class SubjectController extends Controller
         }
          
         $data = request()->validate([
-            'name' => 'required',
-            'year' => 'required',
+            'name_ar' => 'required',
+            'name_en' => 'required',
             'total_hours' => 'required',
-            'teacher_id' => 'required',
+            'level_id' => 'required',
+            'semester_id' => 'required',
+            'code' => 'required',
+            'unit' => 'required',
         ]);        
 
 
@@ -97,12 +90,12 @@ class SubjectController extends Controller
         ));
 
 
-        $subjects = Subject::all();
-        return view('subject.index' , compact('subjects'));
+        $courses = Course::all();
+        return view('subject.index' , compact('courses'));
     }
 
 
-    public function destroy(Subject $sub)
+    public function destroy(Course $sub)
     {
         if(auth()->user()->type != 'admin')
         {
@@ -111,35 +104,26 @@ class SubjectController extends Controller
         }
 
         $sub->delete();
-        $subjects = Subject::all();
-        return view('subject.index' , compact('subjects'));
+
+         $courses = Course::all();
+        return view('subject.index' , compact('courses'));
     }
 
 
     public function get(Request $request)
     {
-        $teacher = User::where('api_token' , $request->get('token'))->first();
-        
-    
+        $instructor = Instructor::where('id' , $request->get('id'))->first();
 
-        $subjects = Subject::where('teacher_id' , $teacher->id)->get();
-        // return 'test';
-        return [ 'subjects' => $subjects ];
+        $courses = $instructor->courses; 
+        return [ 'subjects' => $courses ];
 
 
         
     }
 
-    public function test()
-    {
-        
     
 
-        return 'test';
-
-
-        
-    }
+   
 
 
 

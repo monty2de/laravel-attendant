@@ -12,33 +12,20 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="card-header">{{ __('edit') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="/students/{{$st->id}}">
+                    <form method="POST" action="/semesters/{{$semester->id}}">
                         @csrf
                         @method('PATCH')
 
                         <div class="form-group row">
-                            <label for="name_ar" class="col-md-4 col-form-label text-md-right">{{ __('Name_ar') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name_ar" type="text" class="form-control @error('name_ar') is-invalid @enderror" name="name_ar" value="{{$st->name_ar    }}" required autocomplete="name_ar" autofocus>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{$semester->name    }}" required autocomplete="name" autofocus>
 
-                                @error('name_ar')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="name_en" class="col-md-4 col-form-label text-md-right">{{ __('Name_en') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name_en" type="text" class="form-control @error('name_en') is-invalid @enderror" name="name_en" value="{{$st->name_en    }}" required autocomplete="name_en" autofocus>
-
-                                @error('name_en')
+                                @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -47,16 +34,22 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="level_id" class="col-md-4 col-form-label text-md-right">  year </label>
+                            <label for="year" class="col-md-4 col-form-label text-md-right">{{ __('year') }}</label>
+
                             <div class="col-md-6">
-                            <select name="level_id" id="level_id" class="form-control" >
-                                @foreach ($levels as $level)
-                                    <option value="{{$level->id}}" >{{$level->name}}</option>
-                                @endforeach
-                            </select>      
-                        </div>         
+                                <input id="year" type="text" class="form-control @error('year') is-invalid @enderror" name="year" value="{{$semester->year    }}" required autocomplete="year" autofocus>
+
+                                @error('year')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
 
+                    
+
+              
                        
 
                         <div class="form-group row mb-0">

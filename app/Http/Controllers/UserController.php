@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Instructor;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,7 +15,7 @@ class UserController extends Controller
     public function index()
     {
        
-        $users = User::all();
+        $users = Instructor::all();
         return view('user.index' , compact('users'));
     }
 
@@ -22,13 +23,6 @@ class UserController extends Controller
 
     public function create()
     {
-
-        if(auth()->user()->type != 'admin')
-        {
-            return redirect()->back();
-
-        }
-       
 
         return view('user.create');
 
@@ -45,31 +39,27 @@ class UserController extends Controller
      
 
 
-        User::create([
-            'name' => $request->get('name'),
+        Instructor::create([
+            'name_en' => $request->get('name_en'),
+            'name_ar' => $request->get('name_ar'),
             'email' => $request->get('email'),
-            'password' => Hash::make($request->get('password')),
-            'type' => $request->get('type'),
+            'password' => $request->get('password'),
         ]);
 
-        $users = User::all();
+        $users = Instructor::all();
         return view('user.index' , compact('users'));
     }
 
 
-    public function edit(User $user)
+    public function edit(Instructor $user)
     {
-        if(auth()->user()->type != 'admin')
-        {
-            return redirect()->back();
-
-        }
+      
         
         return view('user.edit', compact('user'));
     
     }
 
-    public function update(User $user)
+    public function update(Instructor $user)
     {
         if(auth()->user()->type != 'admin')
         {
@@ -78,9 +68,9 @@ class UserController extends Controller
         }
          
         $data = request()->validate([
-            'name' => 'required',
+            'name_ar' => 'required',
+            'name_en' => 'required',
             'email' => 'required',
-            'type' => 'required',
         ]);        
 
 
@@ -89,12 +79,12 @@ class UserController extends Controller
         ));
 
 
-        $users = User::all();
+        $users = Instructor::all();
         return view('user.index' , compact('users'));
     }
 
 
-    public function destroy(User $user)
+    public function destroy(Instructor $user)
     {
         if(auth()->user()->type != 'admin')
         {
@@ -103,7 +93,7 @@ class UserController extends Controller
         }
 
         $user->delete();
-        $users = User::all();
+        $users = Instructor::all();
         return view('user.index' , compact('users'));
     }
 
@@ -115,17 +105,16 @@ class UserController extends Controller
             'email' => 'required',
             'password' => 'required',
         ]);
-        $credintial = $request->only('email', 'password');
 
         
 
-        if(Auth::attempt($credintial)){
-            $user = User::where('email', $request->get('email'))->first();
+            
+        $user = Instructor::where('email', $request->get('email'))->where('password', $request->get('password'))->first();
 
 
-            return [ 'token' => $user->api_token , 'id' => $user->id ];
-        }
-        return 'not found';
+        return [ 'id' => $user->id ];
+        
+       
     }
     
 }

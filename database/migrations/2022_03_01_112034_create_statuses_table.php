@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatesSubjectStudentPivotTable extends Migration
+class CreateStatusesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class CreatesSubjectStudentPivotTable extends Migration
      */
     public function up()
     {
-        Schema::create('subject_student', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('subject_id');
+        Schema::create('statuses', function (Blueprint $table) {
+            $table->id();
             $table->unsignedBigInteger('student_id');
+            $table->string('student_name');
+            $table->string('student_year');
+            $table->string('subject_name');
+            $table->string('status');
             $table->timestamps();
         });
     }
@@ -28,6 +31,6 @@ class CreatesSubjectStudentPivotTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('statuses');
     }
 }

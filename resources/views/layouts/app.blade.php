@@ -27,9 +27,9 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'attendent system') }}
-                </a>
+               
+                <!-- <a class="navbar-brand" href="{{ url('/') }}">{{ config('app.name', 'attendent system') }}</a>  -->
+                
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -40,17 +40,22 @@
                        
                         @if (Auth::user())
                             <li class="nav-item">
-                                <a  class="nav-link" href="{{ url('/users') }}"> users</a>
+                                <a  class="nav-link" href="{{ url('/users') }}"> Instructor</a>
                             </li>
                             @endif
                             <li class="nav-item">
-                                <a  class="nav-link" href="{{ url('/students') }}"> students</a>
+                                <a  class="nav-link" href="{{ url('/students') }}"> Students</a>
                             </li>
-                            @if (Auth::user())
+                            
                             <li class="nav-item">
-                                <a  class="nav-link" href="{{ url('/subjects') }}"> subjects</a>
+                                <a  class="nav-link" href="{{ url('/subjects') }}"> Courses</a>
                             </li>
-                            @endif
+                            
+
+                            <li class="nav-item">
+                                <a  class="nav-link" href="{{ url('/povits') }}"> assign course</a>
+                            </li>
+                            
                             
                             <li class="nav-item">
                                 <a  class="nav-link" href="{{ url('/attendent') }}"> attendent</a>
@@ -59,12 +64,35 @@
                                 <a  class="nav-link" href="{{ url('/sick') }}"> sick leave</a>
                             </li>
 
-                            @if (Auth::user())
+                            
                             <li class="nav-item">
                                 <a  class="nav-link" href="{{ url('/attendent/export') }}"> export data</a>
                             </li>
-                            @endif
+                            
+
+                            
+                            <li class="nav-item">
+                                <a  class="nav-link" href="{{ url('/levels') }}"> levels</a>
+                            </li>
+                            
+
+                            
+                            <li class="nav-item">
+                                <a  class="nav-link" href="{{ url('/semesters') }}"> semesters</a>
+                            </li>
+
+                            
+
+                            <li class="nav-item">
+                                <form action="/status/deleteall" method="POST">
+                                    {{ csrf_field() }}
+                                    {{ method_field('DELETE') }}
                         
+                                    <button type="submit" class="nav-link" style="color: red ;border:none; background-color:#ffffffff;">Delete all records</button>
+                                </form>
+                            </li>
+                            
+     
                       
                     </ul>
 

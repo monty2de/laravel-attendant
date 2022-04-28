@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Level;
 use App\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
@@ -17,48 +19,42 @@ class StudentController extends Controller
 
     public function index()
     {
-        $year1 = Student::where('year' , 1)->get();
-        $year2 = Student::where('year' , 2)->get();
-        $year3 = Student::where('year' , 3)->get();
-        $year4 = Student::where('year' , 4)->get();
-        return view('student.index' , compact('year1' , 'year2' , 'year3' , 'year4'));
+       
+        
+        $students = Student::orderBy('level_id')->get();       
+       
+        return view('student.index' , compact('students'));
     }
 
     public function create()
     {
-
-        return view('student.create');
+        $levels = Level::all();
+        return view('student.create', compact('levels'));
 
     }
 
     public function store(Request $request)
     {
 
-        $request->validate([
-            //'body'=>'required',
-        ]);
-
-
         Student::create([
-            'name' => $request->get('name'),
-            'email' => $request->get('email'),
-            'phone_number' => $request->get('phone_number'),
-            'year' => $request->get('year'),
+            'name_ar' => $request->get('name_ar'),
+            'name_en' => $request->get('name_en'),
+            'level_id' => $request->get('level_id'),
     
         ]);
 
-        $year1 = Student::where('year' , 1)->get();
-        $year2 = Student::where('year' , 2)->get();
-        $year3 = Student::where('year' , 3)->get();
-        $year4 = Student::where('year' , 4)->get();
-        return view('student.index' , compact('year1' , 'year2' , 'year3' , 'year4'));
+       
+        $students = Student::orderBy('level_id')->get();       
+       
+        return view('student.index' , compact('students')); 
     }
 
 
+    
     public function edit(Student $st)
     {
-        
-        return view('student.edit', compact('st'));
+        $levels = Level::all();
+        return view('student.edit', compact('st' , 'levels'));
     
     }
 
@@ -66,10 +62,9 @@ class StudentController extends Controller
     {
          
         $data = request()->validate([
-            'name' => 'required',
-            'email' => 'required',
-            'phone_number' => 'required',
-            'year' => 'required',
+            'name_ar' => 'required',
+            'name_en' => 'required',
+            'level_id' => 'required',
         ]);        
 
 
@@ -80,11 +75,10 @@ class StudentController extends Controller
 
       
 
-        $year1 = Student::where('year' , 1)->get();
-        $year2 = Student::where('year' , 2)->get();
-        $year3 = Student::where('year' , 3)->get();
-        $year4 = Student::where('year' , 4)->get();
-        return view('student.index' , compact('year1' , 'year2' , 'year3' , 'year4'));
+      
+        $students = Student::orderBy('level_id')->get();       
+       
+        return view('student.index' , compact('students'));   
     }
 
 
@@ -93,11 +87,10 @@ class StudentController extends Controller
 
         $st = Student::where('id', $id)->first();
         $st->delete();
-        $year1 = Student::where('year' , 1)->get();
-        $year2 = Student::where('year' , 2)->get();
-        $year3 = Student::where('year' , 3)->get();
-        $year4 = Student::where('year' , 4)->get();
-        return view('student.index' , compact('year1' , 'year2' , 'year3' , 'year4'));
+
+        $students = Student::orderBy('level_id')->get();       
+       
+        return view('student.index' , compact('students'));  
 
     }
 
@@ -124,13 +117,11 @@ class StudentController extends Controller
 
     }
 
-
-
     public function get(Request $request)
     {
       
 
-        $students = Student::where('year', $request->get('year'))->get();
+        $students = Student::where('level_id', $request->get('level_id'))->get();
 
 
         return [ 'students' => $students ];

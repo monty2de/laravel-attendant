@@ -15,10 +15,16 @@ class CreateStudentsTable extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email');
-            $table->text('phone_number');
-            $table->integer('year');
+            $table->unsignedBigInteger('level_id');//levels have many students
+            $table->string('name_ar');
+            $table->string('name_en')->nullable();
+            $table->double('avg1')->nullable();
+            $table->double('avg2')->nullable();
+            $table->double('avg3')->nullable();
+            $table->double('avg4')->nullable();
+            $table->double('avg5')->nullable();
+            $table->double('avg6')->nullable();
+            $table->string('note')->nullable();
             $table->timestamps();
         });
     }

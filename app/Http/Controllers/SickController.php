@@ -22,11 +22,11 @@ class SickController extends Controller
     public function store(Request $request)
     {
 
-        $student = Student::where('name', 'LIKE' ,'%'. $request->get('name') . '%')->first();
+        $student = Student::where('name_ar', 'LIKE' ,'%'. $request->get('name') . '%')->first();
 
         Sick::create([
             'student_id' => $student->id,
-            'student_name' => $student->name,
+            'student_name' => $student->name_ar,
             'date' => Carbon::now(),
           
 

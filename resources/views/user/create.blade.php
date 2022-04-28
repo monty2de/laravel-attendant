@@ -19,12 +19,26 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                            <label for="name_ar" class="col-md-4 col-form-label text-md-right">Name in arabic</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                <input id="name_ar" type="text" class="form-control @error('name_ar') is-invalid @enderror" name="name_ar" value="{{ old('name_ar') }}" required autocomplete="name_ar" autofocus>
 
-                                @error('name')
+                                @error('name_ar')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="name_en" class="col-md-4 col-form-label text-md-right">Name in english</label>
+
+                            <div class="col-md-6">
+                                <input id="name_en" type="text" class="form-control @error('name_en') is-invalid @enderror" name="name_en" value="{{ old('name_en') }}" required autocomplete="name_en" autofocus>
+
+                                @error('name_en')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -68,19 +82,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="type" class="col-md-4 col-form-label text-md-right">{{ __('type') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="type" type="text" class="form-control" name="type" >
-
-                                @error('type')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+                       
                        
 
                         <div class="form-group row mb-0">

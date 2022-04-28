@@ -12,8 +12,8 @@
   
 <div class="d-flex justify-content-center " style="margin-bottom: 20px">
 
-  <a class="btn btn-primary" href="/subjects/add" style="  font-size:20px">add courses</a>
-
+  <a class="btn btn-primary" href="/semesters/add" style="  font-size:20px">add semesters</a>
+                
     
 
 </div>
@@ -26,26 +26,27 @@
     <thead class="thead-dark">
       <tr>
         <th scope="col"> name  </th>
-        <th scope="col"> total hours   </th>
+        <th scope="col"> year  </th>
         <th scope="col"> edit </th>
         <th scope="col"> delete </th>
 
       </tr>
     </thead>
     <tbody>
-        @foreach ($courses as $subject )
+        @foreach ($semesters as $semester )
       <tr>
-        <td>   {{ $subject->name_en }} </td>
-        <td>{{$subject->total_hours}}</td>
+        <td>   {{ $semester->name }} </td>
+        <td>   {{ $semester->year }} </td>
+      
 
         <td>
           <div class="">
-              <a href="/subjects/{{$subject->id}}/edit">edit</a>
+              <a href="/semesters/{{$semester->id}}/edit">edit</a>
               
           </div>
       </td>
       <td>
-          <form action="/subjects/{{$subject->id}}" method="POST">
+          <form action="/semesters/{{$semester->id}}" method="POST">
               {{ csrf_field() }}
                  {{ method_field('DELETE') }}
       

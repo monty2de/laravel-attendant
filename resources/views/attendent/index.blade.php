@@ -1,12 +1,9 @@
-
-
-
-
 @extends('layouts.app')
 
 @section('content')
 
-
+<div class="container">
+  
 <div class="text-center" style="margin-bottom: 20px">
   <h1>Status: {{$message}}</h1>
 </div>
@@ -17,7 +14,7 @@
       <tr>
         <th scope="col"> date  </th>
         <th scope="col"> hours  </th>
-        <th scope="col"> delet </th>
+        <th scope="col"> delete </th>
 
       </tr>
     </thead>
@@ -27,34 +24,20 @@
         <td>   {{ $attended->date }} </td>
         <td>   {{ $attended->hours }} </td>
 
-      <td>
-     
+        <td>
           <form action="/attendent/{{$attended->id}}" method="POST">
-              {{ csrf_field() }}
-                 {{ method_field('DELETE') }}
+            {{ csrf_field() }}
+            {{ method_field('DELETE') }}
       
-                  <button type="submit" class="btn " style="color: blue">DELET</button>
-             </form>
-      </td>
-        
-        
+            <button type="submit" class="btn " style="color: blue">DELETE</button>
+          </form>
+        </td>
       </tr>
       @endforeach
       
     </tbody>
   </table>
 
-
-
-
-
-
-
-
+</div>
 
 @endsection
-
-
-
-
-

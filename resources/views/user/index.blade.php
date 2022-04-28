@@ -26,18 +26,16 @@
     <tr>
       <th scope="col"> name  </th>
       <th scope="col"> email   </th>
-      <th scope="col"> type </th>
       <th scope="col"> edit </th>
-      <th scope="col"> delet </th>
+      <th scope="col"> delete </th>
 
     </tr>
   </thead>
   <tbody>
       @foreach ($users as $user )
     <tr>
-      <td><a href="/users/{{$user->id}}"> {{ $user->name }}</a></td>
+      <td><a href="/users/{{$user->id}}"> {{ $user->name_ar }}</a></td>
       <td>{{$user->email}}</td>
-      <td>{{$user->type}}</td>
       <td>
           <div class="">
               <a href="/users/{{$user->id}}/edit">edit</a>
@@ -49,7 +47,7 @@
               {{ csrf_field() }}
                  {{ method_field('DELETE') }}
       
-                  <button type="submit" class="btn " style="color: blue">DELET</button>
+                  <button type="submit" class="btn " style="color: blue">DELETE</button>
              </form>
       </td>
       
