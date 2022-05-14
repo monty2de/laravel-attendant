@@ -34,7 +34,7 @@
     <tbody>
         @foreach ($levels as $level )
       <tr>
-        <td>   {{ $level->name }} </td>
+        <td>   {{ $level->level }}  - {{ $level->year }}</td>
       
 
         <td>

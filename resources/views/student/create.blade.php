@@ -52,7 +52,7 @@
                             <div class="col-md-6">
                             <select name="level_id" id="level_id" class="form-control" >
                                 @foreach ($levels as $level)
-                                    <option value="{{$level->id}}" >{{$level->name}}</option>
+                                    <option value="{{$level->id}}" >{{$level->level}} - {{$level->year}}</option>
                                 @endforeach
                             </select>      
                         </div>         

@@ -19,6 +19,8 @@ class CreateInstructorsTable extends Migration
             $table->string('name_en')->nullable();
             $table->string('email')->unique()->nullable();
             $table->string('password')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('address')->nullable();
             $table->timestamps();
         });
     }

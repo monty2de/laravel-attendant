@@ -20,8 +20,26 @@ class LevelController extends Controller
 
     public function create()
     {
+        $levels = [
+            'bachaelor' => 'bachaelor',
+            'master' => 'master',
+            'pHD' => 'pHD',
+        ];
+        $years = [
+            'first' => 'first',
+            'second' => 'second',
+            'third' => 'third',
+            'fourth' => 'fourth',
+            'fifth' => 'fifth',
+            'sixth' => 'sixth',
+            'seventh' => 'seventh',
+            'eigth' => 'eigth',
+            'ninth' => 'ninth',
+            'tenth' => 'tenth',
+            
+        ];
 
-        return view('level.create');
+        return view('level.create' , compact('levels' , 'years'));
 
     }
 
@@ -37,7 +55,8 @@ class LevelController extends Controller
 
 
         Level::create([
-            'name' => $request->get('name'),
+            'level' => $request->get('level'),
+            'year' => $request->get('year'),
          
         ]);
 
@@ -48,9 +67,28 @@ class LevelController extends Controller
 
     public function edit(Level $level)
     {
+
+        $levels = [
+            'bachaelor' => 'bachaelor',
+            'master' => 'master',
+            'pHD' => 'pHD',
+        ];
+        $years = [
+            'first' => 'first',
+            'second' => 'second',
+            'third' => 'third',
+            'fourth' => 'fourth',
+            'fifth' => 'fifth',
+            'sixth' => 'sixth',
+            'seventh' => 'seventh',
+            'eigth' => 'eigth',
+            'ninth' => 'ninth',
+            'tenth' => 'tenth',
+            
+        ];
       
         
-        return view('level.edit', compact('level'));
+        return view('level.edit', compact('level' , 'levels' , 'years'));
     
     }
 
@@ -63,7 +101,8 @@ class LevelController extends Controller
         }
        
         $data = request()->validate([
-            'name' => 'required',
+            'level' => 'required',
+            'year' => 'required',
            
         ]);        
 

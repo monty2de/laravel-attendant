@@ -35,7 +35,7 @@
       @foreach ($students as $student )
     <tr>
       <td>  {{ $student->name_ar }}  </td>
-      <td>{{$student->level->name}}</td>
+      <td>{{$student->level->level}} - {{$student->level->year}}</td>
       <td>
           <div class="">
               <a href="/students/{{$student->id}}/edit">edit</a>

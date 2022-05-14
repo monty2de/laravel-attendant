@@ -181,7 +181,8 @@ class AttendanceController extends Controller
 
         $students = Student::where('level_id' , (int)$request->get('level_id')  )->get();
         $subjects = Course::where('level_id' , (int)$request->get('level_id')  )->get();
-        $level_name = Level::where('id' , (int)$request->get('level_id')  )->first();
+        $level_get = Level::where('id' , (int)$request->get('level_id')  )->first();
+        $level_name = $level_get->level . ' - ' . $level_get->year;
         foreach ($students as  $student) {
 
             foreach ($subjects as  $subject) {
@@ -259,7 +260,7 @@ class AttendanceController extends Controller
                     $old->update([/////////////////////////////////////////////////
                         'student_id' => $student->id,
                         'student_name' => $student->name_ar,
-                        'student_year' => $level_name->name,
+                        'student_year' => $level_name,
                         'subject_name' => $subject->name_en,
                         'status' => $status,
 
@@ -269,7 +270,7 @@ class AttendanceController extends Controller
                     Status::create([
                         'student_id' => $student->id,
                         'student_name' => $student->name_ar,
-                        'student_year' => $level_name->name,
+                        'student_year' => $level_name,
                         'subject_name' => $subject->name_en,
                         'status' => $status,
                         
@@ -288,7 +289,7 @@ class AttendanceController extends Controller
         
         // feach the status and sort it by subject name
         
-        $statuses = Status::where('student_year' , $level_name->name )->orderBy('subject_name')->get();
+        $statuses = Status::where('student_year' , $level_name )->orderBy('subject_name')->get();
 
         
         // dd($statuses);
@@ -306,8 +307,8 @@ class AttendanceController extends Controller
 
         $student = Student::where('name_ar' , 'LIKE' ,'%'. $request->get('name') . '%' )->first();
         $subjects = Course::where('level_id' , $student->level_id )->get();
-        $level_name = Level::where('id' , $student->level_id  )->first();
-
+        $level_get = Level::where('id' , $student->level_id  )->first();
+        $level_name = $level_get->level . ' - ' . $level_get->year;
         
 
             foreach ($subjects as  $subject) {
@@ -384,7 +385,7 @@ class AttendanceController extends Controller
                     $old->update([
                         'student_id' => $student->id,
                         'student_name' => $student->name_ar,
-                        'student_year' => $level_name->name,
+                        'student_year' => $level_name,
                         'subject_name' => $subject->name_en,
                         'status' => $status,
 
@@ -394,7 +395,7 @@ class AttendanceController extends Controller
                     Status::create([
                         'student_id' => $student->id,
                         'student_name' => $student->name_ar,
-                        'student_year' => $level_name->name,
+                        'student_year' => $level_name,
                         'subject_name' => $subject->name_en,
                         'status' => $status,
                         

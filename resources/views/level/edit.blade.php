@@ -19,18 +19,28 @@
                         @csrf
                         @method('PATCH')
 
+                        
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
-
+                            <label for="level" class="col-md-4 col-form-label text-md-right">  year </label>
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{$level->name    }}" required autocomplete="name" autofocus>
+                            <select name="level" id="level" class="form-control" >
+                                @foreach ($levels as $level)
+                                    <option value="{{$level}}" >{{$level}}</option>
+                                @endforeach
+                            </select>      
+                        </div>         
+                        </div>
 
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+
+                        <div class="form-group row">
+                            <label for="year" class="col-md-4 col-form-label text-md-right">  year </label>
+                            <div class="col-md-6">
+                            <select name="year" id="year" class="form-control" >
+                                @foreach ($years as $year)
+                                    <option value="{{$year}}" >{{$year}}</option>
+                                @endforeach
+                            </select>      
+                        </div>         
                         </div>
 
                     
