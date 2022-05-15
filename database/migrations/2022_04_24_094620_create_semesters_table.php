@@ -13,7 +13,7 @@ class CreateSemestersTable extends Migration
      */
     public function up()
     {
-        Schema::create('semesters', function (Blueprint $table) {
+        Schema::connection('mysql2')->create('semesters', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('year');

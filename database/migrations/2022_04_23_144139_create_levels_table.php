@@ -13,7 +13,7 @@ class CreateLevelsTable extends Migration
      */
     public function up()
     {
-        Schema::create('levels', function (Blueprint $table) {
+        Schema::connection('mysql2')->create('levels', function (Blueprint $table) {
             $table->id();
             $table->enum('level',['bachaelor','master','pHD']);
             $table->enum('year',['first','second','third','fourth', 'sixth', 'fifth','seventh','eigth','ninth','tenth']);

@@ -13,7 +13,7 @@ class CreateCourseInstructorTable extends Migration
      */
     public function up()
     {
-        Schema::create('course_instructor', function (Blueprint $table) {
+        Schema::connection('mysql2')->create('course_instructor', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('instructor_id');
             $table->unsignedBigInteger('course_id');

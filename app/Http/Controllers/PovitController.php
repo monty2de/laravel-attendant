@@ -15,7 +15,7 @@ class PovitController extends Controller
     {
        
 
-        $data = DB::table('course_instructor')->get();
+        $data = DB::connection('mysql2')->table('course_instructor')->get();
         return view('povit.index' , compact('data'));
     }
 
@@ -43,7 +43,7 @@ class PovitController extends Controller
         $instructor_name = Instructor::where('id' , $request->get('instructor_id'))->first();
 
 
-        $data = DB::table('course_instructor')->insert([
+        $data = DB::connection('mysql2')->table('course_instructor')->insert([
             'course_id' => $request->get('course_id'),
             'instructor_id' => $request->get('instructor_id'),
             'instructor_name' => $instructor_name->name_ar,
@@ -55,7 +55,7 @@ class PovitController extends Controller
         
         
 
-        $data = DB::table('course_instructor')->get();
+        $data = DB::connection('mysql2')->table('course_instructor')->get();
         return view('povit.index' , compact('data'));
 
       
@@ -65,7 +65,7 @@ class PovitController extends Controller
     public function edit($id)
     {   
         
-        $data = DB::table('course_instructor')->where('id' , (int)$id)->first();
+        $data = DB::connection('mysql2')->table('course_instructor')->where('id' , (int)$id)->first();
         // dd($data);
         $courses = Course::all();
         $instructors = Instructor::all();
@@ -90,7 +90,7 @@ class PovitController extends Controller
  
 
         
-        $data = DB::table('course_instructor')->where('id' , '=' , $id)->update([
+        $data = DB::connection('mysql2')->table('course_instructor')->where('id' , '=' , $id)->update([
             'course_id' => $request->get('course_id'),
             'instructor_id' => $request->get('instructor_id'),
             'instructor_name' => $instructor_name->name_ar,
@@ -99,7 +99,7 @@ class PovitController extends Controller
         
         
 
-        $data = DB::table('course_instructor')->get();
+        $data = DB::connection('mysql2')->table('course_instructor')->get();
         return view('povit.index' , compact('data'));
        
 
@@ -115,9 +115,9 @@ class PovitController extends Controller
 
         }
 
-        $data = DB::table('course_instructor')->where('id' , '=' , $id)->delete();
+        $data = DB::connection('mysql2')->table('course_instructor')->where('id' , '=' , $id)->delete();
 
-        $data = DB::table('course_instructor')->get();
+        $data = DB::connection('mysql2')->table('course_instructor')->get();
         return view('povit.index' , compact('data'));
     }
 

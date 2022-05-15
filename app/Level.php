@@ -10,7 +10,7 @@ class Level extends Model
 
     protected $guarded = [];
 
-
+    protected $connection = 'mysql2';
 
 
     public function students()

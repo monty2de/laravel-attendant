@@ -10,7 +10,7 @@ class Instructor extends Model
 
     protected $guarded = [];
 
-
+    protected $connection = 'mysql2';
     public function courses()
     {
         return $this->belongsToMany(Course::class);
