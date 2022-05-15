@@ -19,7 +19,8 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="name_ar" class="col-md-4 col-form-label text-md-right">subject name_ar</label>
+                            <label for="name_ar" class="col-md-4 col-form-label text-md-right">Name in arabic
+                            </label>
 
                             <div class="col-md-6">
                                 <input id="name_ar" type="text" class="form-control @error('name_ar') is-invalid @enderror" name="name_ar" value="{{ old('name_ar') }}" required autocomplete="name_ar" autofocus>
@@ -33,7 +34,8 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="name_en" class="col-md-4 col-form-label text-md-right">subject name_en</label>
+                            <label for="name_en" class="col-md-4 col-form-label text-md-right">Name in english
+                            </label>
 
                             <div class="col-md-6">
                                 <input id="name_en" type="text" class="form-control @error('name_en') is-invalid @enderror" name="name_en" value="{{ old('name_en') }}" required autocomplete="name_en" autofocus>

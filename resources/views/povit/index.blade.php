@@ -12,7 +12,7 @@
   
 <div class="d-flex justify-content-center " style="margin-bottom: 20px">
 
-  <a class="btn btn-primary" href="/povits/add" style="  font-size:20px">add povits</a>
+  <a class="btn btn-primary" href="/povits/add" style="  font-size:20px">assign </a>
 
     
 
