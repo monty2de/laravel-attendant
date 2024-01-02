@@ -4,10 +4,12 @@
 
 ### File Naming :
 Class : Pascal Case.
+
 Normal File : Camel Case.
 
 ### Folder Naming :
 Folder in App Directory: Pascal Case.
+
 Folder in Another Directory: Camel Case.
 
 ### Api Route Naming : 
