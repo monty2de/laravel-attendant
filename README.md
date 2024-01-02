@@ -25,3 +25,13 @@ GitHub branch: type/issue Number-short Description.
 GitHub commit: issueNumber | Details.
 
 
+## How to start
+- Install PHP
+- Install Composer 
+- run: composer install
+- run: copy .env.example .env
+- run: php artisan key:generate
+- run: php artisan cache:clear
+- run: php artisan storage:link
+
+
